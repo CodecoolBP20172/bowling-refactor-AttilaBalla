@@ -35,7 +35,7 @@ def score(scorestring):
     scorelist = list(map(handlechar, scorelist))  # convert all numbers to int from str
 
     for index, item in enumerate(scorelist):
-        if (laststrike):
+        if (lastframe):
             break
         try:
             result += item
