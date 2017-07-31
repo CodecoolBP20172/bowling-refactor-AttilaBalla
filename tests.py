@@ -27,5 +27,9 @@ class MyTests(unittest.TestCase):
         self.assertEqual(score("1/35XXX458/X3/23"),     160)
         self.assertEqual(score("1/35XXX458/X3/XX6"),    189)
 
+    def test_extra_stuff(self):  # additional custom tests added by me
+        self.assertEqual(score("1111111111222222222/-"), 36)
+        self.assertEqual(score("1111111111222222222/5"), 41)
+
 if __name__ == '__main__':
     unittest.main()

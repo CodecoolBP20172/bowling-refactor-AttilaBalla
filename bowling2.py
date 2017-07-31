@@ -8,7 +8,10 @@ def handlechar(ch, mode='int'):
         try:
             return int(ch)
         except ValueError:
-            return 10
+            if (ch == '-'):
+                return 0
+            else:
+                return 10
 
 
 def handlespare(scorelist, index):
@@ -27,9 +30,9 @@ def handlestrike(scorelist, index):
 
 def score(scorestring):
     result = 0
-    laststrike = False
-    scorelist = [ch.upper() for ch in scorestring]
-    scorelist = list(map(handlechar, scorelist))
+    lastframe = False
+    scorelist = [ch.upper() for ch in scorestring]  # make a list out of the input and capitalize all letters
+    scorelist = list(map(handlechar, scorelist))  # convert all numbers to int from str
 
     for index, item in enumerate(scorelist):
         if (laststrike):
@@ -38,10 +41,12 @@ def score(scorestring):
             result += item
         except TypeError:
             if(item == '/'):
+                if ((len(scorelist) - index-1) == 1):
+                    lastframe = True
                 result += handlespare(scorelist, index)
             elif(item == 'X'):
                 if ((len(scorelist) - index-1) == 2):
-                    laststrike = True
+                    lastframe = True
                 result += handlestrike(scorelist, index)
     return result
 
